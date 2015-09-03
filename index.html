@@ -1,18 +1,22 @@
-<!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 	<script type="text/javascript" src="bower_components/react/react.js"></script>
 	<script type="text/javascript" src="bower_components/react/JSXTransformer.js"></script>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 </head>
 <body>
-	<script type="text/jsx">
-	React.render(
-		<p>this is rendered text</p>,
-		document.getElementById('example')
-	)
+	<div class="container">
+		<script type="text/jsx">
+		
+			React = window.React;			
 
-	</script>	
+			React.render(
+				<p>this is rendered text</p>,
+				document.getElementById('example')
+			)
+
+		</script>	
 
 	<div id="example"></div>
 
@@ -25,19 +29,83 @@
 					</p>
 				)	
 			}
-
 		});
 
 		React.render(
 			<GeneratedText />, 
 			document.getElementById('example-2')
 		)
-		
+
 
 	</script>
 
 	<div id="example-2"></div>
 
+	<script type="text/jsx">
+	var ContentText = React.createClass({
+		render: function() {
+			return (
+				<span>
+					Composed components rendered
+				</span>
+			)
+		}
+	});
 
+	var SecondaryContent = React.createClass({
+		render: function() {
+			return (
+				<p className="secondary">
+					<ContentText />
+				</p>	
+			)
+		}
+
+	})
+
+	React.render(
+		<SecondaryContent />,
+		document.getElementById('example-3')
+	)
+
+	</script>
+
+	<div id="example-3"></div>
+
+
+	<script type="text/jsx">
+
+		var SecondaryButton = React.createClass({
+			render: function() {
+				return (
+					<span className="button secondary">
+						{this.props.children}
+					</span>
+				)
+			}
+
+		})
+
+		var ContentBlock = React.createClass({
+			render: function() {
+				return (
+					<SecondaryButton>
+						My button
+					</SecondaryButton>
+				)
+			}
+		})
+
+		React.render(
+			<ContentBlock />, 
+			document.getElementById('content-1')
+		) 
+
+	</script>	
+
+
+	<div id="content-1"></div>
+
+	</div>
 </body>
 </html>
