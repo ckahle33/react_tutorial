@@ -78,14 +78,14 @@
 		var SecondaryButton = React.createClass({
 			render: function() {
 				return (
-					<span className="button secondary">
+					<span className="btn btn-default">
 						{this.props.children}
 					</span>
 				)
 			}
 
 		})
-
+  
 		var ContentBlock = React.createClass({
 			render: function() {
 				return (
@@ -105,6 +105,107 @@
 
 
 	<div id="content-1"></div>
+
+	<script type="text/jsx">
+		var BetterButton = React.createClass({
+			render: function() {
+				var classString = 'btn ';
+				classString += this.props.buttonType;
+
+				return(
+					<span className={classString}>
+						{this.props.children}
+					</span>
+				);
+
+			}
+		});
+
+		React.render(
+			<BetterButton buttonType="btn-primary">
+				My Better Button
+			</BetterButton>,
+			document.getElementById('content-2')
+		);
+
+	</script>
+
+
+	<div id="content-2"></div>
+
+	<script type="text/jsx">
+		
+		var data = [
+	    {
+	        name: "Antonin",
+	        description: "Web developer"
+	    },
+	    {
+	        name: "Juno",
+	        description: "Web designer"
+	    },
+	    {
+	        name: "Alix",
+	        description: "Web designer"
+	    }
+		];
+
+		var MetaList = React.createClass({
+			render: function() {
+				return (
+					<ul className="list-meta">
+						<li><a href="#">Like person</a></li>
+					</ul>
+				)
+			}
+
+
+
+		})
+
+		var Person = React.createClass({
+			render: function() {
+				return (
+					<li>
+						{this.props.person.name} | {this.props.person.description}
+
+						<MetaList />
+
+					</li>
+				)
+			}
+
+		})
+
+		var PeopleList = React.createClass({
+			render: function() {
+				var personNodes = this.props.data.map(function(person){
+					return (
+						<Person person={person} key={person.name} />
+					);
+
+				});
+
+				return (
+					<ul className="block-list comment-block">
+						{personNodes}
+					</ul>
+				)
+
+			}
+
+		});
+
+		React.render(
+			<PeopleList data={data} />,
+			document.getElementById('content')
+		);
+
+
+	</script>
+
+	<div id="content"></div>
+
 
 	</div>
 </body>
